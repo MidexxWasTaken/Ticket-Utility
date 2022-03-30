@@ -1,8 +1,6 @@
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        console.log('interaction received');
-        // console.log(interaction);
         const { client } = interaction;
         if (interaction.isCommand()) {
             const command = client.slashCommands.get(interaction.commandName);
@@ -19,7 +17,8 @@ module.exports = {
                 });
             }
         } else if (interaction.isButton()) {
-            console.log('Interaction is a BUTTON');
+            const worked2 = "You claimed your ticket";
+            const worked = "You cancelled your ticket";
             if (interaction.customId.includes('Button')) {
                 if (interaction.customId.includes('-claim')) {
                     await interaction.reply({ content: worked2 });
