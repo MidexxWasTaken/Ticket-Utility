@@ -33,6 +33,7 @@ module.exports = {
         } else {
             const name = `ticket-${stp.ticket + 1}-${String(i.user.username).substring(0, 10)}`;
             const perms = [
+                { id: i.client.sts.app, type: 'member', allow: ['ADD_REACTIONS', 'VIEW_CHANNEL', 'SEND_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS'], deny: [] },
                 { id: i.guild.id, type: 'role', allow: ['USE_EXTERNAL_EMOJIS'], deny: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY', 'SEND_MESSAGES']},
                 { id: i.user.id, type: 'member', allow: ['ADD_REACTIONS', 'VIEW_CHANNEL', 'SEND_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS'], deny: ['CREATE_INSTANT_INVITE', 'CREATE_PUBLIC_THREADS']},
                 { id: stp.role, type: 'role', allow: ['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'], deny: ['SEND_MESSAGES'] }

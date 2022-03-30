@@ -1,5 +1,5 @@
 
-const { Client, Collection, MessageEmbed, interactionCreate } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 const bot = require(`${__dirname}/config/Bot.json`);
 const chalk = require('chalk')
 
@@ -25,11 +25,8 @@ client.once('ready', () => {
     console.log(chalk.yellow(' [ READY ] Waffle is online and ready to eat waffles!'))
 });
 
-client.emit('interactionCreate', null);
-client.on('interactionCreate', interaction)
-
-['events', 'slashCmd'].forEach(fl => {
-    require(`${__dirname}/handlers/${fl}`)(client);
+['slashCmd', 'events'].forEach(handler => {
+    require(`${__dirname}/handlers/${handler}`)(client);
 });
 
 client.login(bot.token);
