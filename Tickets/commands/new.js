@@ -1,16 +1,6 @@
 
 const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
-const fs = require('fs');
-
-async function file_check(ruta) {
-    try {
-        delete require.cache[require.resolve(ruta)];
-        const status = require(ruta);
-        return status;
-    } catch (error) {
-        return false;
-    }
-}
+const { file_check, file_write } = require('../handlers/functions');
 
 module.exports = {
     data: {
@@ -41,8 +31,8 @@ module.exports = {
 
             const ticket = await category.createChannel(name, { reason: 'Opened a Ticket', topic: `**USER:** ${i.user.tag} | **ID:** ${i.user.id}`, permissionOverwrites: perms });
             const uptade = { role: stp.role, category: stp.category, ticket: (stp.ticket + 1) };
-            fs.writeFileSync(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, JSON.stringify(uptade), { encoding: 'utf8' });
-
+            file_write(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, JSON.stringify(uptade), { encoding: 'utf8' });
+            
             const buttons = new MessageActionRow().addComponents(
                 new MessageButton().setCustomId('Button-claim').setEmoji('✋').setLabel('Claim').setStyle('SUCCESS'),
                 new MessageButton().setCustomId('Button-cancel').setEmoji('❌').setLabel('Cancel').setStyle('DANGER')
