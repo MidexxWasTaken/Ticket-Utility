@@ -1,5 +1,5 @@
 
-const fs = require('fs');
+const { file_write } = require('../handlers/functions');
 
 module.exports = {
     data: {
@@ -24,7 +24,7 @@ module.exports = {
         const rl = i.options.getRole('role');
         const uptade = { role: rl.id, category: ct.id, ticket: 0 };
 
-        fs.writeFileSync(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, JSON.stringify(uptade), { encoding: 'utf8' });
+        file_write(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, JSON.stringify(uptade), { encoding: 'utf8' });
         await i.editReply({ content: `*The configuration file was successfully updated.*\n\n• **Category:** ${ct.toString()}\n• **Role:** ${rl.toString()}` });
     }
 };
