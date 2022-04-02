@@ -40,7 +40,10 @@ module.exports = {
                         new MessageButton().setCustomId('Yes').setEmoji('✋').setLabel('Yes').setStyle('SUCCESS'),
                         new MessageButton().setCustomId('No').setEmoji('❌').setLabel('No').setStyle('DANGER')
                     );
-                    await interaction.reply({ content: worked });
+                    await interaction.reply({ content: worked, components: [buttons] });
+                } else if (interaction.customId.includes('Yes')) {
+
+                } else if (interaction.customId.includes('No')) {
                 }
             }
         }
