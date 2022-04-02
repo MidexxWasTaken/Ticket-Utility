@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const { file_check } = require('../handlers/functions');
 
 module.exports = {
@@ -23,17 +23,27 @@ module.exports = {
             const stp = await file_check(`${interaction.client.sts.dir}/Setup/${interaction.guild.id}.json`);
             const ticketEmbed = (user) => new MessageEmbed().setTitle('Ticket claim').setDescription(`<@!${user.id}> has claimed this ticket, expect some help from them soon.`);
             const worked = "You cancelled your ticket";
-            const no = "You cannot claim this ticket";
+            const no = "You cannot claim this ticket. [PERMS ERROR]";
             if (interaction.customId.includes('Button')) {
                 if (interaction.customId.includes('-claim')) {
                     let allowedRole = await interaction.guild.roles.fetch(stp.role);
                     if (interaction.member.roles.cache.has(allowedRole.id)) {
                         await interaction.reply({embeds: [ticketEmbed(interaction.user)]});
                     } else {
-                        await interaction.reply({content: no });
+                        await interaction.reply({
+                            content: no ,
+                            ephemeral: true
+                        });
                     }
                 } else if (interaction.customId.includes('-cancel')) {
-                    await interaction.reply({ content: worked });
+                    const buttons = new MessageActionRow().addComponents(
+                        new MessageButton().setCustomId('Yes').setEmoji('✋').setLabel('Yes').setStyle('SUCCESS'),
+                        new MessageButton().setCustomId('No').setEmoji('❌').setLabel('No').setStyle('DANGER')
+                    );
+                    await interaction.reply({ content: worked, components: [buttons] });
+                } else if (interaction.customId.includes('Yes')) {
+
+                } else if (interaction.customId.includes('No')) {
                 }
             }
         }
