@@ -14,5 +14,7 @@ const file_write = (path, data = {}, options = {}) => {
   fs.writeFileSync(path, data, options);
 }
 
-module.exports.file_check = file_check;
-module.exports.file_write = file_write;
+module.exports = {
+    file_check,
+    file_write
+}
