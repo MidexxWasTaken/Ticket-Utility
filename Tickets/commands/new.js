@@ -31,7 +31,7 @@ module.exports = {
 
             const ticket = await category.createChannel(name, { reason: 'Opened a Ticket', topic: `**USER:** ${i.user.tag} | **ID:** ${i.user.id}`, permissionOverwrites: perms });
             const uptade = { role: stp.role, category: stp.category, ticket: (stp.ticket + 1) };
-            file_write(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, JSON.stringify(uptade), { encoding: 'utf8' });
+            file_write(`${i.client.sts.dir}/Setup/${i.guild.id}.json`, uptade);
             
             const buttons = new MessageActionRow().addComponents(
                 new MessageButton().setCustomId('Button-claim').setEmoji('✋').setLabel('Claim').setStyle('SUCCESS'),
