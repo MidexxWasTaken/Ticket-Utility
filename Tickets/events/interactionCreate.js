@@ -4,7 +4,7 @@ const { file_check } = require('../handlers/functions');
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        const { client } = interaction;
+        const { client, guild, member } = interaction;
         if (interaction.isCommand()) {
             const command = client.slashCommands.get(interaction.commandName);
 
@@ -20,14 +20,14 @@ module.exports = {
                 });
             }
         } else if (interaction.isButton()) {
-            const stp = await file_check(`${interaction.client.sts.dir}/Setup/${interaction.guild.id}.json`);
+            const stp = await file_check(`${client.sts.dir}/Setup/${guild.id}.json`);
             const ticketEmbed = (user) => new MessageEmbed().setTitle('Ticket claim').setDescription(`<@!${user.id}> has claimed this ticket, expect some help from them soon.`);
             const worked = "Are you sure you wanna cancel this ticket?";
             const no = "You cannot claim this ticket. [PERMS ERROR 102]";
             if (interaction.customId.includes('Button')) {
                 if (interaction.customId.includes('-claim')) {
-                    let allowedRole = await interaction.guild.roles.fetch(stp.role);
-                    if (interaction.member.roles.cache.has(allowedRole.id)) {
+                    let allowedRole = await guild.roles.fetch(stp.role);
+                    if (member.roles.cache.has(allowedRole.id)) {
                         await interaction.reply({embeds: [ticketEmbed(interaction.user)]});
                     } else {
                         await interaction.reply({
@@ -37,20 +37,20 @@ module.exports = {
                     }
                 } else if (interaction.customId.includes('-cancel')) {
                     const buttons = new MessageActionRow().addComponents(
-                        new MessageButton().setCustomId('Yes').setEmoji('✋').setLabel('Yes').setStyle('SUCCESS'),
-                        new MessageButton().setCustomId('No').setEmoji('❌').setLabel('No').setStyle('DANGER')
+                        new MessageButton().setCustomId('Button-Yes').setEmoji('✋').setLabel('Yes').setStyle('SUCCESS'),
+                        new MessageButton().setCustomId('Button-No').setEmoji('❌').setLabel('No').setStyle('DANGER')
                     );
                     await interaction.reply({ 
                         content: worked, 
-                        components: [buttons],
-                        ephemeral: true
+                        components: [buttons]
                  });
-                } else if (interaction.customId.includes('Yes')) {
+                } else if (interaction.customId.includes('-Yes')) {
                     interaction.channel.delete()
                     interaction.user.send('test')
-                } else if (interaction.customId.includes('No')) {
-                    interaction.message.delete()
-            }
+                } else if (interaction.customId.includes('-No')) {
+                    const message = await interaction.channel.messages.fetch(interaction.message.id);
+                    message.delete();
+                }
             }
         }
     }
