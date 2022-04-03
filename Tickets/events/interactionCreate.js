@@ -22,8 +22,8 @@ module.exports = {
         } else if (interaction.isButton()) {
             const stp = await file_check(`${interaction.client.sts.dir}/Setup/${interaction.guild.id}.json`);
             const ticketEmbed = (user) => new MessageEmbed().setTitle('Ticket claim').setDescription(`<@!${user.id}> has claimed this ticket, expect some help from them soon.`);
-            const worked = "You cancelled your ticket";
-            const no = "You cannot claim this ticket. [PERMS ERROR]";
+            const worked = "Are you sure you wanna cancel this ticket?";
+            const no = "You cannot claim this ticket. [PERMS ERROR 102]";
             if (interaction.customId.includes('Button')) {
                 if (interaction.customId.includes('-claim')) {
                     let allowedRole = await interaction.guild.roles.fetch(stp.role);
@@ -40,11 +40,17 @@ module.exports = {
                         new MessageButton().setCustomId('Yes').setEmoji('✋').setLabel('Yes').setStyle('SUCCESS'),
                         new MessageButton().setCustomId('No').setEmoji('❌').setLabel('No').setStyle('DANGER')
                     );
-                    await interaction.reply({ content: worked, components: [buttons] });
+                    await interaction.reply({ 
+                        content: worked, 
+                        components: [buttons],
+                        ephemeral: true
+                 });
                 } else if (interaction.customId.includes('Yes')) {
-
+                    interaction.channel.delete()
+                    interaction.user.send('test')
                 } else if (interaction.customId.includes('No')) {
-                }
+                    interaction.message.delete()
+            }
             }
         }
     }
