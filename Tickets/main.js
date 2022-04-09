@@ -17,11 +17,18 @@ client.sts = {
     app: bot.applicationID
 };
 
-client.once('ready', () => {
+client.once('ready', async () => {
     console.log(chalk.green(`  [ DISCORD ] Logged in as ${client.user.tag}!`));
-    console.log(chalk.green('  [ COMMANDS ] Loaded new.js...'))
-    console.log(chalk.green('  [ COMMANDS ] Loaded setup.js...'))
+    client.slashCommands.forEach(cmd => {
+        console.log(chalk.green(`  [ SLASH ] Loaded ${cmd.data.name}.js ...`));
+    });
     console.log(chalk.green('  [ BOT ] Buying some waffles...'))
+    const slashCommandsArray = [...new Set(client.slashCommands.map( cmd => cmd.data ))];
+    console.log(`${client.user.tag} has logged into the following servers:`);
+    client.guilds.cache.map(async guild => {
+        console.log(`    -  ${guild.name}`);
+        await guild.commands.set(slashCommandsArray);
+    })
     console.log(chalk.yellow(' [ READY ] Waffle is online and ready to eat waffles!'))
 });
 
