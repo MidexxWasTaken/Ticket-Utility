@@ -11,7 +11,7 @@ module.exports = (client) => {
         const slash = require(`${client.sts.dir}/commands/${cmd}`);
 
         try {
-            if (!['setup', 'new', 'help'].includes(slash.data.name)) continue;
+            if (!['setup', 'new', 'help', 'add'].includes(slash.data.name)) continue;
             client.slashCommands.set(slash.data.name, slash);
             cmd_slash.push(slash.data);
         } catch (error) {

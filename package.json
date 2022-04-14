@@ -1,10 +1,16 @@
 {
   "name": "Midexx",
+  "main": "./main.js",
   "dependencies": {
     "@discordjs/rest": "^0.3.0",
-    "@discordjs/builders": "^0.6.0",
+    "@discordjs/builders": "^0.12.0",
     "chalk": "^4.1.2",
-    "discord-api-types": "^0.29.0",
+    "discord-api-types": "^0.30.0",
     "discord.js": "^13.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --trace-warnings ./main.js",
+    "start": "node --no-warnings --trace-deprecation ./main.js"
   }
 }
