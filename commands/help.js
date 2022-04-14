@@ -17,25 +17,33 @@ module.exports = {
         const button_1 = new MessageButton()
             .setCustomId('Right')
             .setEmoji("➡️")
-            .setStyle('PRIMARY');
+            .setLabel('Next')
+            .setStyle('SECONDARY');
   
         const button_2 = new MessageButton()
             .setCustomId('Left')
             .setEmoji("⬅️")
-            .setStyle('PRIMARY');
+            .setLabel('Prev')
+            .setStyle('SECONDARY');
   
         const button_3 = new MessageButton()
             .setCustomId('Stop')
-            .setEmoji('<a:stop:851111621433491467>')
+            .setEmoji('<a:xmark:963582538104852500>')
+            .setLabel('Cancel')
             .setStyle('PRIMARY')
+
+      const button_4 = new MessageButton()
+            .setURL('https://www.google.ca/')
+            .setLabel('Vote')
+            .setStyle('LINK')
   
-        const row = new MessageActionRow( {components: [button_2, button_3, button_1], type: "BUTTON" } );
+        const row = new MessageActionRow( {components: [button_4, button_2, button_1, button_3], type: "BUTTON" } );
         let page = 0;
         const pages = [
-            new MessageEmbed().setTitle('Page 1').setDescription('This is page 1'),
-            new MessageEmbed().setTitle('Page 2').setDescription('This is page 2'),
-            new MessageEmbed().setTitle('Page 3').setDescription('This is page 3'),
-            new MessageEmbed().setTitle('Page 4').setDescription('This is page 4')
+            new MessageEmbed().setTitle('Help Menu').setDescription('This is all the commands you can use!').addField('Help', '/help Help menu!', false).addField('Setup', '/setup Setup the bot!', false).addField('New', '/new Help menu!', false).setFooter('Page 1 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('Ressources').setDescription('These are some useful ressources!').addField('Website', 'https://www.waffleticketbot.tk', false).addField('Documentation', 'https://waffle.waffleticketbot.tk/', false).addField('Invite', '[Invite the bot!](https://discord.com/api/oauth2/authorize?client_id=888552245661151242&permissions=2147568656&scope=bot%20applications.commands)', false).setFooter('Page 2 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('Quick support').setDescription('Quick FAQ').addField('How to add the bot?', 'Go in the previous help menu and click "Invite the bot"', false).addField('How to setup', 'Run /setup and provide the required fields', false).addField('Is the bot open source?', 'Yes it is! But the github isnt ready for the moment', false).setThumbnail(client.user.displayAvatarURL()).setFooter('Page 3 of 4'),
+            new MessageEmbed().setTitle('Credits').setDescription('Thank you page!').addField('Help', 'Thank you to kbtalkin#0012 for helping me so much with this bot', false).addField('I dont remember your user credits','Also thank you to everybody else who helped me develop this bot.', false).setFooter('Page 4 of 4').setThumbnail(client.user.displayAvatarURL())
         ];
   
   
@@ -90,7 +98,7 @@ module.exports = {
         });
         collector.on('end', (_, reason) => {
             if (reason !== 'messageDelete') {
-                const disableRow = new MessageActionRow( {components: [button_2.setDisabled(true), button_3.setDisabled(true), button_1.setDisabled(true)], type: "BUTTON" } );
+                const disableRow = new MessageActionRow( {components: [button_4.setDisabled(true), button_2.setDisabled(true), button_1.setDisabled(true), button_3.setDisabled(true)], type: "BUTTON" } );
                 currPage.edit({
                     embeds: [pages[page]], components: [disableRow]
                 });

@@ -50,6 +50,7 @@ module.exports = {
                 } else if (interaction.customId.includes('-No')) {
                     const message = await interaction.channel.messages.fetch(interaction.message.id);
                     message.delete();
+        interaction.reply({ embeds: [embed], components: [buttons] });
                 }
             }
         }

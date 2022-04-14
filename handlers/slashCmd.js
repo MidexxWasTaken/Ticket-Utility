@@ -12,6 +12,7 @@ module.exports = (client) => {
 
         try {
             if (!['setup', 'new', 'help', 'add'].includes(slash.data.name)) continue;
+            if (!['setup', 'add', 'new', 'help', 'remove'].includes(slash.data.name)) continue;
             client.slashCommands.set(slash.data.name, slash);
             cmd_slash.push(slash.data);
         } catch (error) {

@@ -1,5 +1,5 @@
 
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, MessageEmbed } = require('discord.js');
 const bot = require(`${__dirname}/config/Bot.json`);
 const chalk = require('chalk')
 
@@ -35,5 +35,15 @@ client.once('ready', async () => {
 ['slashCmd', 'events'].forEach(handler => {
     require(`${__dirname}/handlers/${handler}`)(client);
 });
+
+client.on("ready", () => {
+    client.user.setActivity('/help', { type: 'LISTENING'});
+})
+
+const JoinEmbed = new MessageEmbed().setDescription('Hey there! My name is **Waffle**').addField('How to start', 'To get started, either run /help or set the bot up with /setup', false).addField('Important Links', '[Invite the bot!](https://discord.com/api/oauth2/authorize?client_id=888552245661151242&permissions=2147568656&scope=bot%20applications.commands) - Add the bot to one of your amazing servers and provide help to your members!').addField('\u200b', '[Website](https://www.waffleticketbot.tk) - The official website of the bot where you can see command and documentation to help if you are a bit lost.', false)
+client.on('guildCreate', guild => {
+const channel = guild.channels.cache.get(guild.systemChannelId);
+channel.send({embeds: [JoinEmbed]})
+})
 
 client.login(bot.token);
