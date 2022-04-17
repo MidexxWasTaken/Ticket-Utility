@@ -40,10 +40,10 @@ module.exports = {
         const row = new MessageActionRow( {components: [button_4, button_2, button_1, button_3], type: "BUTTON" } );
         let page = 0;
         const pages = [
-            new MessageEmbed().setTitle('Help Menu').setDescription('This is all the commands you can use!').addField('Help', '/help Help menu!', false).addField('Setup', '/setup Setup the bot!', false).addField('New', '/new Help menu!', false).setFooter('Page 1 of 4').setThumbnail(client.user.displayAvatarURL()),
-            new MessageEmbed().setTitle('Ressources').setDescription('These are some useful ressources!').addField('Website', 'https://www.waffleticketbot.tk', false).addField('Documentation', 'https://waffle.waffleticketbot.tk/', false).addField('Invite', '[Invite the bot!](https://discord.com/api/oauth2/authorize?client_id=888552245661151242&permissions=2147568656&scope=bot%20applications.commands)', false).setFooter('Page 2 of 4').setThumbnail(client.user.displayAvatarURL()),
-            new MessageEmbed().setTitle('Quick support').setDescription('Quick FAQ').addField('How to add the bot?', 'Go in the previous help menu and click "Invite the bot"', false).addField('How to setup', 'Run /setup and provide the required fields', false).addField('Is the bot open source?', 'Yes it is! But the github isnt ready for the moment', false).setThumbnail(client.user.displayAvatarURL()).setFooter('Page 3 of 4'),
-            new MessageEmbed().setTitle('Credits').setDescription('Thank you page!').addField('Help', 'Thank you to kbtalkin#0012 for helping me so much with this bot', false).addField('I dont remember your user credits','Also thank you to everybody else who helped me develop this bot.', false).setFooter('Page 4 of 4').setThumbnail(client.user.displayAvatarURL())
+            new MessageEmbed().setTitle('p1').setDescription('page1').setFooter('Page 1 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('p2').setDescription('page2').setFooter('Page 2 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('p3').setDescription('page3').setFooter('Page 3 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('p4').setDescription('page4').setFooter('Page 4 of 4').setThumbnail(client.user.displayAvatarURL())
         ];
   
   
