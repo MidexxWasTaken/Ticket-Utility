@@ -40,8 +40,8 @@ module.exports = {
         const row = new MessageActionRow( {components: [button_4, button_2, button_1, button_3], type: "BUTTON" } );
         let page = 0;
         const pages = [
-            new MessageEmbed().setTitle('p1').setDescription('page1').setFooter('Page 1 of 4').setThumbnail(client.user.displayAvatarURL()),
-            new MessageEmbed().setTitle('p2').setDescription('page2').setFooter('Page 2 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('p1').setDescription('Here are the important links you need when using waffle!\n ╭✧ docs.waffle-bot.me\n ︰https://discord.gg/DSwqChkRz5\n ╰✧Upcoming dashboard?').setFooter('Page 1 of 4').setThumbnail(client.user.displayAvatarURL()),
+            new MessageEmbed().setTitle('p2').setDescription('A few commands to get you started with your adventure\n ╭✧/setup: allows you to configure the bot according to your server\n :/add adds a user to the ticket\n :/new creates a ticket\n ╰✧/help is where you are at! Congrats for finding it. ').setFooter('Page 2 of 4').setThumbnail(client.user.displayAvatarURL()),
             new MessageEmbed().setTitle('p3').setDescription('page3').setFooter('Page 3 of 4').setThumbnail(client.user.displayAvatarURL()),
             new MessageEmbed().setTitle('p4').setDescription('page4').setFooter('Page 4 of 4').setThumbnail(client.user.displayAvatarURL())
         ];
